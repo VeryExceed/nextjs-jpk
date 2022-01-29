@@ -1,10 +1,14 @@
 import '../styles/globals.css'
+import Meta from '@/Common/Meta'
 
-function MyApp({
+export default function MyApp({
   Component, // 当前路由组件
   pageProps, // 含有已请求数据的对象
 }) {
-  return <Component {...pageProps} />
+  return (
+    <>
+      <Meta />
+      <Component {...pageProps} />
+    </>
+  )
 }
-
-export default MyApp
