@@ -1,4 +1,3 @@
-import req from './request'
 import request from './request'
 
 // 搜索结果
