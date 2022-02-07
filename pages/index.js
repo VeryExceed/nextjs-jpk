@@ -5,7 +5,7 @@ import Talk from '@/p_home/Talk'
 import { getHome } from 'core/api'
 
 export default function Home({ home = {} }) {
-  const { banner,fixedEntries } = home
+  const { banner, fixedEntries } = home
   return (
     <div>
       <Head>

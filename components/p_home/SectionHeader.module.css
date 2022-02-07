@@ -1,0 +1,44 @@
+.header {
+  height: 0.72rem;
+  margin:0.68rem 0.32rem 0.4rem;
+  /* overflow: hidden; */
+  display: flex;
+  justify-content: space-between;
+  color: #afafaf;
+}
+.title{
+  /* float: left; */
+  height: 0.64rem;
+  padding-left: 0.22rem;
+  border-left:0.08rem solid #fb4a3e;
+}
+
+.title h4{
+  margin: 0 0 0.05rem;
+  font-size: 0.36rem;
+  line-height: 0.42rem;
+  color: #393939;
+}
+
+.title h5 {
+  font-size: 0.18rem;
+  line-height: 0.2rem;
+}
+
+.header a  {
+  /* float: right; */
+  margin-left: auto;
+  display:  block;
+  font-size: 0.28rem;
+  line-height: 0.7rem;
+}
+
+.header a span {
+  vertical-align: 0.02rem;
+  margin-right: 0.12rem;
+}
+.header a img {
+  height: 0.2rem;
+  width: 0.14rem;
+  vertical-align: 0.04rem;
+}
