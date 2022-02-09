@@ -33,6 +33,43 @@ li {
   list-style-type: none;
 }
 
+:root {
+  --main-bg-color: red;
+}
+
+button {
+  padding: 0;
+  margin: 0;
+  background-color: inherit;
+  border: none;
+  outline: none;
+}
+
+.border-b-1px,
+.border-t-1px,
+.border-all-1px {
+  position: relative;
+}
+
+/* 四周1px */
+
+.border-b-1px::after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  color: #e6e6e6;
+  content: '';
+  border-bottom:  1px solid #e6e6e6;
+}
+
+@media (min-resolution:2dppx) {
+  .border-b-1px::after{
+    transform: scaleY(0.5);
+  }
+}
+
 .home-banners .banner-dots {
   position: absolute;
   top: 3.06rem;
