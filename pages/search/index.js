@@ -7,6 +7,7 @@ import Suggest from '@/p_search/suggest'
 import Result from '@/p_search/Result'
 import { getSearchResult, getSearchSuggest, getHotWord } from 'core/api'
 import { throttle } from 'lodash'
+import useLSState from 'core/hooks/useLSState'
 import s from './search.module.css'
 
 const TYPES = {
@@ -19,14 +20,18 @@ export default function Search({ result, hotWord, kw }) {
   const router = useRouter()
   const [contType, setContType] = useState(kw ? TYPES.RESULT : TYPES.HISTORY) // 内容类型
   const [suggestList, setSuggestList] = useState([]) // 推荐数据
-  const [history, setHistory] = useState(kw ? [kw] : []) // 搜索历史
+  const [history, setHistory] = useLSState('searchHistory', kw ? [kw] : []) // 搜索历史
   const [inputVal, setInputVal] = useState(kw || '') // 输入框的值
 
   // 切换到搜索结果路由
   const submitSearch = (kw = '') => {
+    // 保存去重搜索记录, 最长保持6条，最近优先
+    history.unshift(kw)
+    setHistory([...new Set(history.slice(0, 6))])
     setContType(TYPES.RESULT)
     // 替换路由参数
     console.log('切换路由', kw)
+    setInputVal(kw)
     router.replace({
       path: '/search',
       query: {
@@ -46,14 +51,21 @@ export default function Search({ result, hotWord, kw }) {
         // 更新State
         setSuggestList(res)
       }, 300),
-    [contType, setContType,setSuggestList],
+    [contType, setContType, setSuggestList],
   )
 
   // 渲染 内容区
   const renderContent = () => {
     switch (contType) {
       case TYPES.HISTORY:
-        return <History submitSearch={submitSearch} hotWord={hotWord} history={history} />
+        return (
+          <History
+            submitSearch={submitSearch}
+            hotWord={hotWord}
+            history={history}
+            deleteHistory={() => setHistory([])}
+          />
+        )
       case TYPES.SUGGEST:
         return <Suggest submitSearch={submitSearch} data={suggestList} />
       case TYPES.RESULT:
