@@ -47,10 +47,11 @@ const Input = ({ submitSearch, fetchSuggest, showHistory, inputVal, setInputVal 
 
   return (
     <div className={s.container}>
-      <div className={`${s.formCont} border-b-1px`}>
+      <div className={`${s.formCont} border-b-1px ${inputVal ? '' : s.empty}`}>
         {/* 让软键盘显示搜索按钮 */}
         <form action="">
           <input
+            id="searchInputEle"
             className={s.search}
             type="search"
             value={inputVal}
@@ -63,7 +64,7 @@ const Input = ({ submitSearch, fetchSuggest, showHistory, inputVal, setInputVal 
             }}
           />
           {/* 禁止按回车表单自动提交：如果表单中含有多个单行输入框，按Enter键时不会自动提交 */}
-          <input type="text" none="notautosubmit" style={{display:'none'}} />
+          <input type="text" none="notautosubmit" style={{ display: 'none' }} />
         </form>
         {/* 当输入框不为空的时候展示自定义清空按钮 */}
         {inputVal ? <button onClick={clearInput} className={s.clean} /> : null}

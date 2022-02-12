@@ -20,6 +20,7 @@ export default function Search({ result, hotWord, kw }) {
   const router = useRouter()
   const [contType, setContType] = useState(kw ? TYPES.RESULT : TYPES.HISTORY) // 内容类型
   const [suggestList, setSuggestList] = useState([]) // 推荐数据
+  const [loading,setLoading] = useState([false]) // 加载中
   const [history, setHistory] = useLSState('searchHistory', kw ? [kw] : []) // 搜索历史
   const [inputVal, setInputVal] = useState(kw || '') // 输入框的值
 
@@ -29,6 +30,8 @@ export default function Search({ result, hotWord, kw }) {
     history.unshift(kw)
     setHistory([...new Set(history.slice(0, 6))])
     setContType(TYPES.RESULT)
+    // 加载中
+    setLoading(true)
     // 替换路由参数
     console.log('切换路由', kw)
     setInputVal(kw)
@@ -56,6 +59,7 @@ export default function Search({ result, hotWord, kw }) {
 
   // 渲染 内容区
   const renderContent = () => {
+    if (loading) return <div className={s.loading}>加载中......</div>
     switch (contType) {
       case TYPES.HISTORY:
         return (
@@ -78,6 +82,11 @@ export default function Search({ result, hotWord, kw }) {
   const showHistory = () => {
     setContType(TYPES.HISTORY)
   }
+
+  // result数据加载结束清空loading状态
+  useEffect(() => {
+    setLoading(false)
+  }, [result])
 
   return (
     <div>

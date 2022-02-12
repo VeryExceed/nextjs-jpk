@@ -75,6 +75,17 @@ button {
 
 /* 四周1px */
 
+.border-all-1px::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  content: '';
+  border: solid 1px #e6e6e6;
+}
+
 .border-b-1px::after {
   position: absolute;
   bottom: 0;
@@ -89,6 +100,26 @@ button {
 @media (min-resolution:2dppx) {
   .border-b-1px::after{
     transform: scaleY(0.5);
+  }
+
+  .border-all-1px {
+    border: none !important;
+  }
+
+  .border-all-1px::before {
+    width: 200%;
+    height: 200%;
+    transform: scale(0.5);
+
+    /* position: absolute;
+    box-sizing: border-box;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    border: solid 1px #e6e6e6; */
+    transform-origin: left top;
   }
 }
 
