@@ -7,6 +7,7 @@ import Suggest from '@/p_search/suggest'
 import Result from '@/p_search/Result'
 import { getSearchResult, getSearchSuggest, getHotWord } from 'core/api'
 import { throttle } from 'lodash'
+import s from './search.module.css'
 
 const TYPES = {
   HISTORY: 'history',
@@ -25,7 +26,7 @@ export default function Search({ result, hotWord, kw }) {
   const submitSearch = (kw = '') => {
     setContType(TYPES.RESULT)
     // 替换路由参数
-    console.log(kw)
+    console.log('切换路由', kw)
     router.replace({
       path: '/search',
       query: {
@@ -82,7 +83,7 @@ export default function Search({ result, hotWord, kw }) {
           setInputVal={setInputVal}
         />
         {/* 内容区 */}
-        <div>{renderContent()}</div>
+        <div className={s.content}>{renderContent()}</div>
       </main>
     </div>
   )

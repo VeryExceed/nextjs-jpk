@@ -1,4 +1,5 @@
 import { memo, useRef } from 'react'
+import s from './Input.module.css'
 
 const Input = ({ submitSearch, fetchSuggest, showHistory, inputVal, setInputVal }) => {
   const inputEl = useRef(null) // 输入框元素
@@ -8,7 +9,7 @@ const Input = ({ submitSearch, fetchSuggest, showHistory, inputVal, setInputVal 
     if (e.keyCode !== 13 || !inputEl?.current) return
     console.log('searchSubmit')
     const event = e || window.event
-		event.preventDefault()
+    event.preventDefault()
     fetchSuggest.cancel() // 取消等待的搜索建议请求
     const filteredVal = inputEl.current.value.trim()
     // kw空值
@@ -37,7 +38,7 @@ const Input = ({ submitSearch, fetchSuggest, showHistory, inputVal, setInputVal 
     }
   }
 
-	const clearInput = () => {
+  const clearInput = () => {
     fetchSuggest.cancel() // 取消等待的搜索建议请求
     showHistory()
     setInputVal('')
@@ -45,15 +46,28 @@ const Input = ({ submitSearch, fetchSuggest, showHistory, inputVal, setInputVal 
   }
 
   return (
-    <div>
-        <input
-          type="search"
-          value={inputVal}
-          // placeholder={' 输入搜索内容'}
-          onChange={handleChange}
-          ref={inputEl}
-          onKeyUp={searchSubmit}
-        />
+    <div className={s.container}>
+      <div className={`${s.formCont} border-b-1px`}>
+        {/* 让软键盘显示搜索按钮 */}
+        <form action="">
+          <input
+            className={s.search}
+            type="search"
+            value={inputVal}
+            placeholder={' 输入搜索内容'}
+            onChange={handleChange}
+            ref={inputEl}
+            onKeyUp={searchSubmit}
+            onClick={() => {
+              inputEl.current.focus()
+            }}
+          />
+          {/* 禁止按回车表单自动提交：如果表单中含有多个单行输入框，按Enter键时不会自动提交 */}
+          <input type="text" none="notautosubmit" style={{display:'none'}} />
+        </form>
+        {/* 当输入框不为空的时候展示自定义清空按钮 */}
+        {inputVal ? <button onClick={clearInput} className={s.clean} /> : null}
+      </div>
     </div>
   )
 }
