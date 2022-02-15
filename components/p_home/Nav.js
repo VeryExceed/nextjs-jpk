@@ -1,6 +1,5 @@
 import s from './Nav.module.css'
 import ReactSlick from 'react-slick'
-import Link from 'next/link'
 
 const Nav = ({ data = [] }) => {
   const isSwiperable = !!(data && data.length)

@@ -54,7 +54,6 @@ input[type='search']::-webkit-search-results-decoration {
   display: none;
 }
 
-
 :root {
   --main-bg-color: red;
 }
@@ -94,11 +93,39 @@ button {
   width: 100%;
   color: #e6e6e6;
   content: '';
-  border-bottom:  1px solid #e6e6e6;
+  border-bottom: 1px solid #e6e6e6;
 }
 
-@media (min-resolution:2dppx) {
-  .border-b-1px::after{
+.border-l-1px::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  height: 100%;
+  color: #e6e6e6;
+  content: ' ';
+  border-left: 1px solid #e6e6e6;
+}
+
+.border-t-1px::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  color: #e6e6e6;
+  content: ' ';
+  border-top: 1px solid #e6e6e6;
+}
+
+ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (min-resolution: 2dppx) {
+  .border-b-1px::after {
     transform: scaleY(0.5);
   }
 
@@ -120,6 +147,16 @@ button {
     height: 200%;
     border: solid 1px #e6e6e6; */
     transform-origin: left top;
+  }
+}
+
+@media (min-resolution: 3dppx) {
+  .border-b-1px::after {
+    transform: scaleY(0.34);
+  }
+
+  .border-t-1px::before {
+    transform: scaleY(0.34);
   }
 }
 
@@ -168,4 +205,11 @@ button {
 
 .nav-dots li button {
   display: none;
+}
+
+.trueicon {
+  width: 0.32rem;
+  height: 0.32rem;
+  margin-top: -0.06rem;
+  margin-right: 0.12rem;
 }

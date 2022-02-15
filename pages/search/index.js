@@ -20,7 +20,7 @@ export default function Search({ result, hotWord, kw }) {
   const router = useRouter()
   const [contType, setContType] = useState(kw ? TYPES.RESULT : TYPES.HISTORY) // 内容类型
   const [suggestList, setSuggestList] = useState([]) // 推荐数据
-  const [loading,setLoading] = useState([false]) // 加载中
+  const [loading, setLoading] = useState([false]) // 加载中
   const [history, setHistory] = useLSState('searchHistory', kw ? [kw] : []) // 搜索历史
   const [inputVal, setInputVal] = useState(kw || '') // 输入框的值
 
